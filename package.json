@@ -1,0 +1,10 @@
+{
+  "name": "ateky-organizacional",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verificar": "node tools/verificar.mjs",
+    "local:instalar": "node tools/local/instalar.mjs",
+    "local": "node tools/local/servidor.mjs"
+  }
+}

@@ -1,0 +1,308 @@
+<!doctype html><html lang="pt-BR"><head><base target="_top"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ateky Organizacional</title><style>
+:root{font-family:Inter,Arial,sans-serif;color:#183454;background:#f2f7fd}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 85% 12%,#d8eaff 0,transparent 35%),#f2f7fd}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}.hidden{display:none!important}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.035em}.brand-icon{display:grid;place-items:center;background:#2b85ed;border-radius:13px;width:43px;height:43px;color:#fff;font-size:23px;box-shadow:0 6px 16px #0a59af30}.brand small{display:block;font-weight:500;letter-spacing:.14em;font-size:10px;color:#b8d9fa;margin-top:4px}.login-shell{min-height:100vh;display:grid;grid-template-columns:minmax(290px,1fr) minmax(360px,1fr)}.hero{background:linear-gradient(145deg,#092c53,#11539a 60%,#117bd3);color:white;padding:55px clamp(26px,6vw,85px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:400px;height:400px;border:1px solid #ffffff29;border-radius:50%;bottom:-170px;right:-170px;box-shadow:0 0 0 65px #ffffff09,0 0 0 135px #ffffff08}.hero-copy{position:relative;z-index:1}.hero-copy h1{font-size:clamp(35px,4vw,60px);line-height:1.1;max-width:550px;margin:75px 0 20px;letter-spacing:-.04em}.hero-copy p{font-size:16px;color:#cfe4fa;line-height:1.7;max-width:430px}.hero-foot{color:#b6d6f5;font-size:12px;z-index:1}.login-right{display:grid;place-items:center;padding:40px 24px}.login-card{width:min(440px,100%);background:white;padding:40px;border:1px solid #e2edf8;border-radius:24px;box-shadow:0 22px 60px #103b6a14}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:#2173c9}.login-card h2{font-size:29px;letter-spacing:-.03em;margin:12px 0 8px}.muted{color:#72849a;font-size:14px;line-height:1.6}.login-card label{display:block;font-size:13px;font-weight:700;margin-top:22px}.login-card input{display:block;width:100%;margin-top:8px;border:1px solid #d5e2f1;border-radius:11px;padding:14px;background:#f9fcff;outline:none}.login-card input:focus{border-color:#3187df;box-shadow:0 0 0 3px #3187df20}.primary{background:#1674d5;color:white;border:0;border-radius:11px;padding:14px 20px;font-weight:700}.login-card .primary{width:100%;margin-top:26px}.login-card .primary:hover{background:#0e61b6}.test-label{margin-top:22px;font-size:11px;color:#8da0b3;text-align:center}.message{position:fixed;z-index:20;right:20px;bottom:20px;background:white;box-shadow:0 8px 30px #0c2e5522;padding:12px 18px;border-radius:12px;font-size:13px;max-width:380px}.message:empty{display:none}.error{color:#b42318}.ok{color:#187343}.workspace{min-height:100vh;display:grid;grid-template-columns:255px minmax(0,1fr)}.sidebar{background:#0d3159;color:white;padding:26px 17px;display:flex;flex-direction:column;gap:35px}.sidebar .brand{padding:0 8px}.nav-heading{font-size:10px;letter-spacing:.14em;color:#7ea9d2;font-weight:800;margin:0 12px 12px}.sidebar nav button,.logout{display:block;width:100%;text-align:left;border:0;background:transparent;color:#d7e7f8;padding:14px;border-radius:11px;margin:4px 0;font-size:13px}.sidebar nav button:hover,.sidebar nav button.active{background:#1b548d;color:white}.logout{margin-top:auto;border:1px solid #ffffff22}.user-chip{border-top:1px solid #ffffff25;padding:18px 8px 4px}.user-chip strong{display:block;font-size:13px}.user-chip small{color:#a5c6e5}.main-area{min-width:0}.topbar{height:79px;background:#fff;border-bottom:1px solid #e6eef8;display:flex;align-items:center;justify-content:space-between;padding:0 35px}.topbar h3{font-size:15px;margin:0}.pill{background:#e9f5ff;color:#1765ac;border-radius:30px;padding:8px 12px;font-size:11px;font-weight:700}.main-inner{padding:38px;max-width:1250px;margin:auto}.welcome-title{font-size:28px;margin:0 0 8px}.section-sub{color:#70869e;font-size:14px;margin:0 0 28px}.dashboard-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-bottom:22px}.tile{background:white;border:1px solid #e5edf6;border-radius:18px;padding:22px;min-height:145px;box-shadow:0 5px 22px #103b6a08}.tile .glyph{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#e7f2ff;color:#1267bf;font-size:23px;margin-bottom:15px}.tile strong{display:block;font-size:15px}.tile span{display:block;color:#8092a6;font-size:12px;margin-top:6px}.content-card{background:#fff;border:1px solid #e5edf6;border-radius:18px;padding:28px;min-height:220px;box-shadow:0 5px 22px #103b6a08}.content-card input,.content-card select{width:100%;max-width:440px;display:block;padding:12px;margin:10px 0;border:1px solid #d5e2f1;border-radius:9px}.content-card button{background:#e9f3ff;color:#17599b;border:0;border-radius:9px;padding:10px 14px;margin:5px}.content-card button:hover{background:#d9eaff}@media(max-width:900px){.login-shell{grid-template-columns:1fr}.hero{min-height:260px;padding:30px}.hero-copy h1{margin:28px 0 10px;font-size:34px}.hero-foot{display:none}.login-right{padding:30px 18px}.workspace{grid-template-columns:200px 1fr}.dashboard-grid{grid-template-columns:1fr}.main-inner{padding:20px}}@media(max-width:620px){.workspace{grid-template-columns:1fr}.sidebar{gap:12px}.sidebar nav{display:flex;flex-wrap:wrap}.sidebar nav button{width:auto}.topbar{padding:0 20px}.login-card{padding:28px}.user-chip{display:none}}
+</style>
+
+<?!= HtmlService.createHtmlOutputFromFile('Org_Tema_Global').getContent(); ?>
+
+</head><body>
+<!-- ═════════ LOGIN ═════════ -->
+<section id="login" class="login-shell">
+  <aside class="hero">
+    <span class="hero-orb orb-a" aria-hidden="true"></span><span class="hero-orb orb-b" aria-hidden="true"></span>
+    <div class="brand"><div class="brand-icon">A</div><div>ATEKY <small>ORGANIZACIONAL</small></div></div>
+    <div class="hero-copy">
+      <div class="eyebrow" style="color:#90c9ff">PLATAFORMA INTERNA</div>
+      <h1>Seu setor.<br><span class="hero-grad">Mais conectado.</span></h1>
+      <p>Agenda, portabilidades e DETRAF em um só lugar. Organização inteligente para o dia a dia da Ateky.</p>
+      <ul class="hero-feats"><li><span>▦</span>Agenda</li><li><span>⇄</span>Portabilidade</li><li><span>▤</span>DETRAF</li></ul>
+    </div>
+    <div class="hero-foot">ATEKY ORGANIZACIONAL · AMBIENTE DE TESTES</div>
+  </aside>
+  <div class="login-right">
+    <div class="login-card">
+      <div class="eyebrow">BEM-VINDO DE VOLTA</div>
+      <h2>Acesse sua conta</h2>
+      <p class="muted">Entre com seu usuário e senha cadastrados pelo administrador.</p>
+      <form id="loginForm" onsubmit="event.preventDefault();login()">
+        <label for="user">Usuário<input id="user" autocomplete="username" required placeholder="Seu nome de usuário"></label>
+        <label for="pass">Senha
+          <span class="pass-wrap"><input id="pass" type="password" autocomplete="current-password" required placeholder="Digite sua senha">
+          <button type="button" class="pass-toggle" id="passToggle" aria-label="Mostrar senha" onclick="toggleSenha()">👁</button></span>
+        </label>
+        <button type="submit" class="primary" id="loginBtn">Entrar no Organizacional →</button>
+      </form>
+      <div class="test-label">Acesso restrito · Versão de testes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ APLICAÇÃO ═════════ -->
+<section id="app" class="workspace hidden">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">A</div><div>ATEKY <small>ORGANIZACIONAL</small></div></div>
+    <div><div class="nav-heading">MENU PRINCIPAL</div><nav id="menu"></nav></div>
+    <div style="margin-top:auto">
+      <div class="user-chip"><span class="avatar" id="profileAvatar">A</span><div><strong id="profileName">Colaborador</strong><small id="profileRole">Perfil</small></div></div>
+      <button class="logout" onclick="logout()">↪ &nbsp; Sair do sistema</button>
+    </div>
+  </aside>
+  <div class="main-area">
+    <header class="topbar"><h3 id="topTitle">Painel Organizacional</h3><span class="pill"><i class="live-dot"></i> Ambiente de testes</span></header>
+    <main class="main-inner">
+      <div id="homeHead">
+        <div class="hello-date" id="helloDate"></div>
+        <h1 class="welcome-title" id="welcome"></h1>
+        <p class="section-sub">Bem-vindo à central de gestão operacional da Ateky.</p>
+      </div>
+      <div class="dashboard-grid" id="tiles">
+        <button type="button" class="tile" data-modulo="agenda"><div class="glyph">▦</div><strong>Ateky Agenda</strong><span>Compromissos e tarefas</span><em class="tile-go">Abrir →</em></button>
+        <button type="button" class="tile" data-modulo="port"><div class="glyph">⇄</div><strong>Ateky Port</strong><span>Controle de portabilidades</span><em class="tile-go">Abrir →</em></button>
+        <button type="button" class="tile" data-modulo="detraf"><div class="glyph">▤</div><strong>Ateky DETRAF</strong><span>Gestão e acompanhamento</span><em class="tile-go">Abrir →</em></button>
+      </div>
+
+      <div id="detrafPainel" class="hidden">
+        <?!= HtmlService.createHtmlOutputFromFile('Org_Detraf_Interface').getContent(); ?>
+      </div>
+
+      <article class="content-card"><div id="content">Selecione um módulo no menu lateral para começar.</div></article>
+    </main>
+  </div>
+</section>
+<div id="msg" class="message" role="status" aria-live="polite"></div>
+
+<script>
+let token = null, me = null, msgTimer = null;
+const $ = id => document.getElementById(id);
+const MODULOS = {
+  agenda: { label: 'Agenda', icon: '▦', titulo: 'Ateky Agenda', desc: 'Compromissos, tarefas e agenda compartilhada do setor.' },
+  port:   { label: 'Portabilidade', icon: '⇄', titulo: 'Ateky Port', desc: 'Controle e acompanhamento das portabilidades.' },
+  detraf: { label: 'DETRAF', icon: '▤', titulo: 'Ateky DETRAF', desc: 'Gestão e acompanhamento.' }
+};
+const PERFIS = ['colaborador', 'supervisor', 'coordenador', 'administrador'];
+
+/* ───── utilitários ───── */
+function el(tag, cls, txt) { const n = document.createElement(tag); if (cls) n.className = cls; if (txt !== undefined) n.textContent = String(txt); return n; }
+function msg(t, err = false) {
+  const m = $('msg'); m.textContent = t; m.className = 'message ' + (err ? 'error' : 'ok') + ' show';
+  clearTimeout(msgTimer); msgTimer = setTimeout(() => m.classList.remove('show'), err ? 6000 : 3200);
+}
+function call(name, args, done, fail) {
+  google.script.run.withSuccessHandler(done).withFailureHandler(e => {
+    const texto = e && e.message || String(e);
+    if (token && /Sessao (expirada|invalida)|Usuario sem acesso/i.test(texto)) { sessaoEncerrada(texto); }
+    else msg(texto, true);
+    if (fail) fail(e);
+  })[name](...args);
+}
+function carregando(btn, on, texto) {
+  if (on) { btn.dataset.txt = btn.textContent; btn.disabled = true; btn.replaceChildren(el('span', 'spinner'), document.createTextNode(' ' + (texto || 'Aguarde...'))); }
+  else { btn.disabled = false; btn.textContent = btn.dataset.txt || btn.textContent; }
+}
+function animar(n) { if (!n) return; n.classList.remove('anim-in'); void n.offsetWidth; n.classList.add('anim-in'); }
+function iniciais(nome) { return String(nome || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase(); }
+function view(id) {
+  for (const v of ['login', 'app']) $(v).classList.toggle('hidden', v !== id);
+  document.body.classList.toggle('logged-in', id === 'app');
+  animar($(id));
+}
+function setActive(b) { document.querySelectorAll('#menu button').forEach(x => x.classList.remove('active')); if (b) b.classList.add('active'); }
+function menuBtn(key) { return document.querySelector('#menu button[data-key="' + key + '"]'); }
+function toggleSenha() { const p = $('pass'), vis = p.type === 'password'; p.type = vis ? 'text' : 'password'; $('passToggle').setAttribute('aria-label', vis ? 'Ocultar senha' : 'Mostrar senha'); $('passToggle').classList.toggle('on', vis); }
+
+/* ───── sessão ───── */
+function login() {
+  const btn = $('loginBtn'); carregando(btn, true, 'Entrando...');
+  call('orgaLogin', [$('user').value, $('pass').value], r => {
+    token = r.token; me = r.usuario; $('pass').value = ''; carregando(btn, false); load();
+  }, () => { carregando(btn, false); animar($('loginForm')); $('loginForm').classList.add('shake'); setTimeout(() => $('loginForm').classList.remove('shake'), 500); });
+}
+
+function load() {
+  call('orgaMeuPerfil', [token], r => {
+    me = r;
+    view('app');
+    const h = new Date().getHours();
+    $('welcome').textContent = (h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite') + ', ' + String(me.nome).split(' ')[0];
+    $('helloDate').textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' });
+    $('profileName').textContent = me.nome;
+    $('profileRole').textContent = me.perfil;
+    $('profileAvatar').textContent = iniciais(me.nome);
+
+    $('menu').replaceChildren();
+    const inicio = el('button', '', '⌂  Início'); inicio.dataset.key = 'inicio'; inicio.onclick = home; $('menu').append(inicio);
+    for (const key of Object.keys(MODULOS)) {
+      const liberado = r.permissoes.includes(key + '.ler');
+      const tile = document.querySelector('.tile[data-modulo="' + key + '"]');
+      tile.classList.toggle('locked', !liberado);
+      tile.onclick = liberado ? () => abrirModulo(key) : () => msg('Seu perfil não tem acesso a ' + MODULOS[key].label + '.', true);
+      if (!liberado) continue;
+      const b = el('button', '', MODULOS[key].icon + '  ' + MODULOS[key].label);
+      b.dataset.key = key; b.onclick = () => abrirModulo(key);
+      $('menu').append(b);
+    }
+    if (me.perfil === 'administrador') {
+      const b = el('button', '', '⚙  Administração'); b.dataset.key = 'admin';
+      b.onclick = () => { setActive(b); admin(); };
+      $('menu').append(b);
+    }
+    home();
+    msg('Acesso autorizado.');
+  });
+}
+
+function sessaoEncerrada(texto) {
+  token = null; me = null; resetApp(); view('login'); msg(texto || 'Sessão encerrada. Entre novamente.', true);
+}
+function resetApp() {
+  $('menu').replaceChildren(); $('detrafPainel').classList.add('hidden');
+  $('content').textContent = 'Selecione um módulo no menu lateral para começar.';
+}
+function logout() {
+  const t = token; token = null; me = null; resetApp(); view('login');
+  if (t) call('orgaSair', [t], () => msg('Sessão encerrada.'));
+}
+
+/* ───── navegação ───── */
+function mostrarHome(on) {
+  $('homeHead').classList.toggle('hidden', !on); $('tiles').classList.toggle('hidden', !on);
+}
+function cardConteudo() { const card = $('content').closest('.content-card'); card.classList.remove('hidden'); $('detrafPainel').classList.add('hidden'); animar(card); return $('content'); }
+
+function home() {
+  setActive(menuBtn('inicio')); $('topTitle').textContent = 'Painel Organizacional';
+  mostrarHome(true); animar($('tiles'));
+  const c = cardConteudo(); c.replaceChildren();
+  const box = el('div', 'home-info');
+  box.append(el('h3', '', 'Comece por aqui'), el('p', '', 'Escolha um módulo nos cards acima ou no menu lateral. Seus acessos são definidos pelo seu perfil: ' + me.perfil + '.'));
+  const lista = el('div', 'perm-list');
+  (me.permissoes || []).forEach(p => lista.append(el('span', 'perm-chip', p)));
+  box.append(lista); c.append(box);
+}
+
+function abrirModulo(key) {
+  const mod = MODULOS[key]; setActive(menuBtn(key)); $('topTitle').textContent = mod.titulo;
+  mostrarHome(false);
+  const painel = $('detrafPainel'), card = $('content').closest('.content-card');
+  if (key === 'detraf') {
+    painel.classList.remove('hidden'); card.classList.add('hidden'); animar(painel);
+    dtInicializar(token).catch(e => msg(e.message || String(e), true));
+    return;
+  }
+  const c = cardConteudo(); c.replaceChildren();
+  const banner = el('div', 'org-module-banner');
+  const t = el('div'); t.append(el('div', 'org-module-kicker', 'MÓDULO'), el('h2', '', mod.titulo), el('p', '', mod.desc));
+  banner.append(t, el('span', 'org-module-chip', 'EM DESENVOLVIMENTO'));
+  const passos = el('div', 'org-grid');
+  [['Estrutura', 'Telas e cadastros sendo definidos'], ['Integração', 'Usará o mesmo login do Organizacional'], ['Lançamento', 'Disponível nas próximas versões']]
+    .forEach(([a, b], i) => { const k = el('div', 'org-kpi'); k.style.setProperty('--i', i); k.append(el('span', '', 'Etapa ' + (i + 1)), el('strong', '', a), el('small', '', b)); passos.append(k); });
+  c.append(banner, passos);
+}
+
+/* ───── administração ───── */
+function admin() {
+  $('topTitle').textContent = 'Administração'; mostrarHome(false);
+  const c = cardConteudo(); c.replaceChildren();
+
+  const head = el('div', 'adm-head'); head.append(el('h3', '', 'Usuários'), el('p', 'muted', 'Cadastre colaboradores, redefina senhas e controle o acesso.'));
+  c.append(head);
+
+  const form = el('form', 'adm-form');
+  const fields = [['usuario', 'Usuário', 'text', 'ex.: maria.silva'], ['nome', 'Nome', 'text', 'Nome completo'], ['email', 'E-mail (opcional)', 'email', 'nome@empresa.com'], ['senha', 'Senha provisória', 'password', 'Mínimo 12 caracteres'], ['cor', 'Cor (#RRGGBB)', 'text', '#2476D3']];
+  const inputs = {};
+  for (const [key, label, type, ph] of fields) {
+    const l = el('label', 'adm-field'); l.append(el('span', '', label));
+    const i = el('input'); i.type = type; i.placeholder = ph; i.required = ['usuario', 'nome', 'senha'].includes(key);
+    inputs[key] = i; l.append(i); form.append(l);
+  }
+  const lp = el('label', 'adm-field'); lp.append(el('span', '', 'Perfil'));
+  const select = el('select');
+  for (const p of ['colaborador', 'supervisor', 'coordenacao', 'administrador']) { const o = el('option', '', p); o.value = p; select.append(o); }
+  lp.append(select); form.append(lp);
+  const btn = el('button', 'btn-primary', 'Cadastrar colaborador'); btn.type = 'submit';
+  form.append(btn);
+  form.onsubmit = e => {
+    e.preventDefault(); carregando(btn, true, 'Cadastrando...');
+    call('orgCadastrarUsuario', [token, { ...Object.fromEntries(Object.entries(inputs).map(([k, v]) => [k, v.value])), perfil: select.value }],
+      () => { msg('Usuário cadastrado.'); admin(); }, () => carregando(btn, false));
+  };
+  c.append(form);
+
+  const barra = el('div', 'adm-bar');
+  const busca = el('input'); busca.type = 'search'; busca.placeholder = 'Buscar por nome, usuário ou perfil...';
+  const contador = el('span', 'muted', '');
+  barra.append(busca, contador); c.append(barra);
+
+  const list = el('div', 'adm-list'); list.append(skeleton(4)); c.append(list);
+  call('orgListarUsuarios', [token], users => {
+    const render = () => {
+      const q = busca.value.toLowerCase().trim();
+      const vis = users.filter(u => !q || [u.nome, u.usuario, u.perfil].join(' ').toLowerCase().includes(q));
+      contador.textContent = vis.length + ' de ' + users.length + ' usuário(s)';
+      list.replaceChildren();
+      if (!vis.length) { list.append(el('div', 'empty', 'Nenhum usuário encontrado.')); return; }
+      vis.forEach((u, i) => list.append(linhaUsuario(u, i)));
+    };
+    busca.oninput = render; render();
+  }, () => list.replaceChildren(el('div', 'empty', 'Não foi possível carregar os usuários.')));
+}
+
+function linhaUsuario(u, i) {
+  const row = el('div', 'user-row'); row.style.setProperty('--i', i);
+  const ativo = u.ativo === true || u.ativo === 'true';
+  row.classList.toggle('inativo', !ativo);
+  const id = el('div', 'user-id');
+  id.append(el('span', 'avatar sm', iniciais(u.nome)));
+  const tx = el('div'); tx.append(el('strong', '', u.nome), el('small', '', '@' + u.usuario + (u.email ? ' · ' + u.email : '')));
+  id.append(tx);
+  const tags = el('div', 'user-tags');
+  tags.append(el('span', 'tag tag-' + u.perfil, u.perfil), el('span', 'tag ' + (ativo ? 'tag-on' : 'tag-off'), ativo ? 'Ativo' : 'Inativo'));
+  const acoes = el('div', 'user-actions');
+  const reset = el('button', '', 'Redefinir senha');
+  reset.onclick = () => {
+    const nova = prompt('Nova senha para ' + u.usuario + ' (mínimo 12 caracteres):'); if (nova === null) return;
+    call('orgAdminRedefinirSenha', [token, u.id, nova], () => msg('Senha redefinida e sessões anteriores revogadas.'));
+  };
+  const at = el('button', ativo ? 'btn-warn' : '', ativo ? 'Desativar' : 'Ativar');
+  at.onclick = () => {
+    if (ativo && !confirm('Desativar ' + u.nome + '? As sessões abertas serão encerradas.')) return;
+    carregando(at, true, '...');
+    call('orgDefinirAtivo', [token, u.id, !ativo], () => { msg(ativo ? 'Usuário desativado.' : 'Usuário ativado.'); admin(); }, () => carregando(at, false));
+  };
+  const perm = el('button', '', 'Gerenciar permissões'); perm.onclick = () => permissions(u);
+  acoes.append(reset, at, perm);
+  row.append(id, tags, acoes);
+  return row;
+}
+
+function skeleton(n) { const f = document.createDocumentFragment(); for (let i = 0; i < n; i++) f.append(el('div', 'skeleton')); return f; }
+
+function permissions(u) {
+  const c = cardConteudo(); c.replaceChildren();
+  const voltar = el('button', 'crumb', '← Voltar para usuários'); voltar.onclick = admin; c.append(voltar);
+  c.append(el('h3', '', 'Permissões: ' + u.nome));
+  c.append(el('p', 'muted', 'Nesta versão, o acesso é definido pelo perfil do usuário. Para liberar ou restringir módulos, altere o perfil abaixo. A alteração encerra as sessões abertas dele.'));
+  const grid = el('div', 'perfil-grid');
+  const desc = {
+    colaborador: 'DETRAF, Portabilidade e Agenda (ler e editar).',
+    supervisor: 'Igual ao colaborador + compartilhar agenda.',
+    coordenador: 'Igual ao supervisor.',
+    administrador: 'Acesso total, incluindo gestão de usuários e operadoras.'
+  };
+  let escolhido = u.perfil === 'coordenacao' ? 'coordenador' : u.perfil;
+  const cards = PERFIS.map((p, i) => {
+    const b = el('button', 'perfil-card' + (p === escolhido ? ' sel' : ''));
+    b.type = 'button'; b.style.setProperty('--i', i);
+    b.append(el('strong', '', p), el('small', '', desc[p]));
+    b.onclick = () => { escolhido = p; cards.forEach(x => x.classList.toggle('sel', x === b)); };
+    grid.append(b); return b;
+  });
+  c.append(grid);
+  const salvar = el('button', 'btn-primary', 'Salvar perfil');
+  salvar.onclick = () => {
+    if (escolhido === u.perfil) { msg('Nenhuma alteração.'); return; }
+    carregando(salvar, true, 'Salvando...');
+    call('orgaAtualizarUsuario', [token, u.id, { perfil: escolhido }], () => { msg('Perfil atualizado para ' + escolhido + '.'); admin(); }, () => carregando(salvar, false));
+  };
+  c.append(salvar);
+}
+</script></body></html>

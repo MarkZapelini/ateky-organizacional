@@ -1,0 +1,19 @@
+<style>
+:root{--org-bg:#071b39;--org-navy:#09264f;--org-panel:#112f58;--org-line:#245b8c;--org-text:#f8fbff;--org-muted:#bfd7ef;--org-cyan:#64d8ff;--org-pink:#f52b67}
+.org-shell{font-family:Inter,Arial,sans-serif;color:var(--org-text);background:radial-gradient(circle at 80% 20%,#11528d 0%,transparent 35%),linear-gradient(145deg,#071b39,#0b2c59);min-height:100vh}
+.org-hero{position:relative;overflow:hidden;padding:48px 30px;border-radius:22px;background:radial-gradient(circle at 80% 85%,#115ba1 0%,transparent 45%)}
+.org-hero:after{content:"";position:absolute;width:240px;height:240px;border:24px solid var(--org-pink);border-radius:50%;right:-145px;bottom:-165px;pointer-events:none}
+.org-kicker{display:inline-block;padding:10px 17px;border:1px solid #2b83ba;border-radius:30px;color:#b7e9ff;font-size:12px;font-weight:800;letter-spacing:2px}
+.org-kicker:before{content:"●";color:var(--org-pink);margin-right:10px}
+.org-wordmark{font-size:clamp(38px,6vw,76px);font-weight:900;line-height:.99;letter-spacing:-.06em;margin:30px 0 20px}
+.org-wordmark span{display:block}
+.org-wordmark .org-gradient{background:linear-gradient(100deg,#fff 5%,#8bdfff 90%);color:transparent;background-clip:text;-webkit-background-clip:text}
+.org-hero p{max-width:550px;color:var(--org-muted);font-size:18px;line-height:1.6}
+.org-accent{height:5px;width:145px;border-radius:8px;background:linear-gradient(90deg,var(--org-pink),var(--org-cyan));margin-top:26px}
+.org-panel{background:#102b50;border:1px solid var(--org-line);border-radius:18px;padding:22px;box-shadow:0 14px 35px #03132b45}
+.org-panel h2{margin:0 0 12px;color:#fff}
+.org-btn{background:linear-gradient(110deg,#1678ed,#25b8f1);border:0;border-radius:12px;padding:12px 16px;color:#fff;font-weight:700;cursor:pointer}
+.org-btn:focus-visible,.org-link:focus-visible{outline:3px solid var(--org-cyan);outline-offset:3px}
+@media(max-width:600px){.org-hero{padding:32px 20px}.org-hero p{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.org-shell *{animation:none!important;transition:none!important}}
+</style>
