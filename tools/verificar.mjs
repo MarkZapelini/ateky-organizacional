@@ -24,6 +24,8 @@ const src = join(raiz, 'src');
 // (no Apps Script, a pasta faz parte do nome do arquivo).
 const js = readdirSync(join(src, 'js')).filter(f => f.endsWith('.js')).map(f => 'js/' + f);
 const html = readdirSync(join(src, 'html')).filter(f => f.endsWith('.html')).map(f => 'html/' + f);
+// CSS puro em src/css/*.css; o build embrulha em .html para o Apps Script.
+const css = readdirSync(join(src, 'css')).filter(f => f.endsWith('.css')).map(f => 'css/' + f);
 const ler = f => readFileSync(join(src, f), 'utf8');
 
 const erros = [];
@@ -48,6 +50,13 @@ for (const f of html) {
   try { execFileSync(process.execPath, ['--check', copia], { stdio: 'pipe' }); }
   catch (e) { add(erros, 'SINTAXE_HTML', f, String(e.stderr || e.message).split('\n').slice(0, 5).join(' | ')); }
 }
+
+// 1c. Estrutura (EK-006): cada pasta só com a sua extensão real; nada de extensão dupla.
+const esperado = { js: /^[^.]+\.js$/, html: /^[^.]+\.html$/, css: /^[^.]+\.css$/ };
+for (const [pasta, re] of Object.entries(esperado)) {
+  for (const f of readdirSync(join(src, pasta))) if (!re.test(f)) add(erros, 'ESTRUTURA', pasta + '/' + f, `em src/${pasta}/ só ficam arquivos .${pasta} (sem extensão dupla)`);
+}
+for (const f of readdirSync(src)) if (!['js', 'html', 'css', 'appsscript.json'].includes(f)) add(erros, 'ESTRUTURA', f, 'arquivo/pasta fora do padrão em src/');
 
 // 2. Declarações globais
 const declaradas = new Map(); // nome -> [arquivos]
@@ -89,7 +98,8 @@ for (const f of html) {
 const reInclude = /create(?:HtmlOutput|Template)FromFile\(\s*'([^']+)'\s*\)/g;
 for (const f of [...js, ...html]) {
   for (const m of ler(f).matchAll(reInclude)) {
-    if (!html.includes(m[1] + '.html')) add(erros, 'HTML_AUSENTE', f, m[1] + '.html');
+    const alvo = m[1].startsWith('css/') ? m[1] + '.css' : m[1] + '.html';
+    if (![...html, ...css].includes(alvo)) add(erros, 'ARQUIVO_AUSENTE', f, alvo);
   }
 }
 
@@ -107,7 +117,7 @@ const resultado = { erros: unicos(erros), avisos: unicos(avisos), arquivos: { js
 if (process.argv.includes('--json')) {
   console.log(JSON.stringify(resultado, null, 2));
 } else {
-  console.log(`Ateky — verificação de ${js.length} .js e ${html.length} .html em src/\n`);
+  console.log(`Ateky — verificação de ${js.length} .js, ${html.length} .html e ${css.length} .css em src/\n`);
   for (const e of resultado.erros) console.log(`ERRO  [${e.tipo}] ${e.arquivo}: ${e.detalhe}`);
   for (const a of resultado.avisos) console.log(`AVISO [${a.tipo}] ${a.arquivo}: ${a.detalhe}`);
   console.log(`\n${resultado.erros.length} erro(s), ${resultado.avisos.length} aviso(s).`);

@@ -6,7 +6,8 @@ Web App em **Google Apps Script**. Login único (ORGA) + módulo DETRAF 2.0. Amb
 | Extensão | Linguagem | Onde roda |
 |---|---|---|
 | `.js` (em `src/`) | JavaScript (Apps Script, runtime V8). No editor do Google aparece como `.gs`; o `clasp` converte sozinho. | Servidor Google |
-| `.html` | HTML + CSS + JavaScript de navegador (templates do `HtmlService`, `<?!= ?>`) | Navegador |
+| `.css` (em `src/css/`) | CSS puro. O build embrulha em `.html` para o Apps Script | Navegador |
+| `.html` | HTML + JavaScript de navegador (templates do `HtmlService`, `<?!= ?>`) | Navegador |
 | `appsscript.json` | JSON, o manifesto do projeto | Configuração |
 | `tools/*.mjs` | JavaScript Node.js (módulo ES) | Seu computador |
 | `.md` | Markdown, a documentação e as skills | — |
@@ -16,13 +17,15 @@ Web App em **Google Apps Script**. Login único (ORGA) + módulo DETRAF 2.0. Amb
 src/
   appsscript.json     manifesto
   js/   *.js          servidor (Apps Script)
-  html/ *.html        telas e temas
+  html/ *.html        telas (estrutura e scripts de navegador)
+  css/  *.css         estilos (CSS puro)
+dist/                 gerado por npm run build: versão para o Apps Script (css vira .html)
 tools/                verificador, testes, emulador local, túnel
 ```
-No Apps Script a pasta faz parte do nome: os arquivos HTML são referenciados como `'html/Org_Index'`, `'html/Org_Tema_Global'` etc.
+No Apps Script a pasta faz parte do nome: telas são `'html/Org_Index'`, estilos são `'css/Org_Tema_Global'` (no Google vira `css/Org_Tema_Global.html`, gerado pelo build).
 
 ## Arquivos
-**Entrada:** `js/Org_Main.js` (`doGet`) → `html/Org_Index.html` (inclui `html/Org_Tema_Global.html` e `html/Org_Detraf_Interface.html`).
+**Entrada:** `js/Org_Main.js` (`doGet`) → `html/Org_Index.html` (inclui no <head> `css/Org_Base`, `css/Org_Tema_Global`, `css/Org_Detraf` e no corpo `html/Org_Detraf_Interface`).
 
 | Arquivo | Função |
 |---|---|
@@ -41,8 +44,10 @@ No Apps Script a pasta faz parte do nome: os arquivos HTML são referenciados co
 | `Org_Detraf_Integracao.js` / `Org_Dt_Api.js` | APIs complementares (sem uso na tela atual) |
 | `Org_Index.html` | Login, menu, administração |
 | `Org_Detraf_Interface.html` | Tela DETRAF completa (`window.dtInicializar`) |
-| `Org_Tema_Global.html` | Tema escuro global |
-| `Org_Tema_Academy.html` | Tema alternativo (não incluído por padrão) |
+| `css/Org_Base.css` | CSS base (layout) |
+| `css/Org_Tema_Global.css` | Tema escuro, animações, login, ícone |
+| `css/Org_Detraf.css` | Estilos do painel DETRAF |
+| `css/Org_Tema_Academy.css` | Tema alternativo (não incluído) |
 
 `_legado/`: base antiga (`ORG_TABS`), sem uso. `_exemplos/`: trechos de referência, fora do projeto.
 
@@ -56,11 +61,12 @@ No Apps Script a pasta faz parte do nome: os arquivos HTML são referenciados co
 | Comando | Faz |
 |---|---|
 | `npm run verificar` | Checagem estática (sintaxe, duplicadas, funções ausentes, includes) |
-| `npm test` | 50 testes automáticos numa base temporária |
+| `npm test` | 51 testes automáticos numa base temporária |
+| `npm run build` | Gera `dist/` para enviar ao Apps Script (clasp rootDir = dist) |
 | `npm run local:instalar` / `npm run local` | Base e servidor locais em http://localhost:8080 |
 | `tools/tunel-cloudflare.bat` | Publica o servidor local via Cloudflare (o usuário executa) |
 
 ## Regras
 - Antes de entregar ou fazer commit: `npm run verificar` com 0 erros **e** `npm test` com 0 falhas.
-- Skills: `ateky-analisar` (encaixar código novo), `ateky-testar` (rodar e interpretar testes), `ateky-erros` (diagnosticar e registrar a lição em `docs/ERROS_CONHECIDOS.md`), `auditor-projetos-tecnicos` (auditoria de projetos FTTH/telecom).
+- Skills: `ateky-analisar` (encaixar código novo), `ateky-testar` (rodar e interpretar testes), `ateky-prevencao` (checklist para não repetir erros — usar antes de qualquer mudança), `ateky-erros` (diagnosticar e registrar a lição em `docs/ERROS_CONHECIDOS.md`), `auditor-projetos-tecnicos` (auditoria de projetos FTTH/telecom).
 - Funções com `_` no final são privadas e não podem ser chamadas pelo `google.script.run`.

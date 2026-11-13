@@ -5,6 +5,7 @@
  * Uso: node tools/testar.mjs   (ou npm test)   — código de saída 1 se algum teste falhar.
  */
 import { mkdtempSync, rmSync } from 'node:fs';
+import * as await_fs from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -34,6 +35,14 @@ try {
     try { execFileSync(process.execPath, [join(RAIZ, 'tools', 'verificar.mjs')], { stdio: 'pipe' }); }
     catch (e) { throw new Error(String(e.stdout).split('\n').filter(l => l.startsWith('ERRO')).join(' | ')); }
   });
+  teste('build gera dist/ só com .js/.html aceitos pelo Apps Script', () => {
+    execFileSync(process.execPath, [join(RAIZ, 'tools', 'build.mjs')], { stdio: 'pipe' });
+    const { readdirSync, readFileSync: rf } = await_fs;
+    const todos = ['js', 'html', 'css'].flatMap(p => readdirSync(join(RAIZ, 'dist', p)).map(f => p + '/' + f));
+    const invalidos = todos.filter(f => !/\.(js|html)$/.test(f));
+    verdade(!invalidos.length, 'extensões não aceitas: ' + invalidos.join(', '));
+    verdade(rf(join(RAIZ, 'dist', 'css', 'Org_Tema_Global.html'), 'utf8').startsWith('<style data-css="Org_Tema_Global">'), 'CSS não embrulhado');
+  });
   teste('orgaInstalarAuth', () => verdade(api('orgaInstalarAuth').url));
   teste('orgaInstalarAuth é idempotente', () => verdade(api('orgaInstalarAuth').url));
   teste('bootstrap recusa segredo errado', () => {
@@ -51,7 +60,8 @@ try {
   });
   teste('página inicial monta com tema e DETRAF', () => {
     const h = paginaInicial();
-    verdade(h.includes('org-tema-global-v2'), 'tema ausente');
+    for (const c of ['Org_Base', 'Org_Tema_Global', 'Org_Detraf']) verdade(h.includes('data-css="' + c + '"'), 'CSS ausente: ' + c);
+    verdade(h.includes('--org-pink'), 'conteúdo do tema não carregou');
     verdade(h.includes('window.dtInicializar'), 'DETRAF ausente');
     verdade(!h.includes('<?'), 'template não processado');
   });

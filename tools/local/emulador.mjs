@@ -103,7 +103,15 @@ const Utilities = {
 /* ───── HtmlService ───── */
 let ctx;
 // Nome no Apps Script inclui a pasta: 'html/Org_Index' → src/html/Org_Index.html
-const lerHtml = n => { const f = join(SRC, n + '.html'); if (!existsSync(f)) throw new Error('No HTML file named ' + n); return readFileSync(f, 'utf8'); };
+// 'css/Org_Base' → src/css/Org_Base.css, entregue dentro de <style> (igual ao que o build gera).
+const lerHtml = n => {
+  if (n.startsWith('css/')) {
+    const css = join(SRC, n + '.css');
+    if (!existsSync(css)) throw new Error('No HTML file named ' + n);
+    return '<style data-css="' + n.slice(4) + '">\n' + readFileSync(css, 'utf8') + '</style>\n';
+  }
+  const f = join(SRC, n + '.html'); if (!existsSync(f)) throw new Error('No HTML file named ' + n); return readFileSync(f, 'utf8');
+};
 const saida = conteudo => ({ getContent: () => conteudo, setTitle() { return this; }, setXFrameOptionsMode() { return this; }, addMetaTag() { return this; } });
 const HtmlService = {
   createHtmlOutputFromFile: n => saida(lerHtml(n)),

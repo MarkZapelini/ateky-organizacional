@@ -1,86 +1,5 @@
 <!-- ATEKY / DETRAF 2.0 — interface integrada ao Org_Index (dentro de #detrafPainel); sem segundo login.
      Backend: funções dx* em Dx_Nucleo.gs. Ponto de entrada: window.dtInicializar(token). -->
-<style>
-/* Escopo visual do DETRAF original: marinho, azul elétrico, detalhes em rosa. */
-.main-area:has(#detrafPainel:not(.hidden)){background:#061931!important;min-height:100vh}
-.main-area:has(#detrafPainel:not(.hidden)) .topbar{background:#071c38;color:#eaf4ff;border-color:#1b4773}
-.main-inner:has(#detrafPainel:not(.hidden)){max-width:none!important;background:#061931;padding:24px!important;color:#f3f8ff}
-.main-inner:has(#detrafPainel:not(.hidden))>.welcome-title,
-.main-inner:has(#detrafPainel:not(.hidden))>.section-sub,
-.main-inner:has(#detrafPainel:not(.hidden))>.dashboard-grid{display:none!important}
-#detrafPainel{font-family:Inter,Arial,sans-serif;color:#edf5ff}
-#detrafPainel *{box-sizing:border-box}
-#detrafPainel .dx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:8px 0 22px}
-#detrafPainel .dx-kicker{color:#59baff;font-weight:800;letter-spacing:.18em;font-size:10px;text-transform:uppercase}
-#detrafPainel h1{font-size:clamp(27px,3vw,34px);letter-spacing:-.03em;margin:9px 0 6px;color:#fff}
-#detrafPainel .dx-sub{color:#adc7e6;font-size:14px;line-height:1.55;margin:0}
-#detrafPainel .dx-topbtn{white-space:nowrap}
-#detrafPainel .dx-splash{border-radius:22px;min-height:145px;padding:29px;background:linear-gradient(115deg,#0b2950,#1462ad 74%,#238cf2);border:1px solid #2e7bc2;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;overflow:hidden}
-#detrafPainel .dx-splash h2{font-size:29px;margin:10px 0 6px;color:#fff}
-#detrafPainel .dx-splash p{margin:0;color:#d5e8ff;max-width:540px}
-#detrafPainel .dx-mark{width:77px;height:77px;border:4px solid #9bdcff;transform:rotate(45deg);border-radius:12px;opacity:.8;margin-right:30px;flex-shrink:0}
-#detrafPainel .dx-accent{display:inline-block;background:#f60056;padding:7px 12px;border-radius:40px;font-size:10px;font-weight:800;letter-spacing:.09em}
-#detrafPainel .dx-toolbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:14px 0 17px;background:#0b294b;border:1px solid #266096;border-radius:16px;padding:17px}
-#detrafPainel .dx-toolbar label{display:flex;flex:1;min-width:190px;flex-direction:column;gap:7px;color:#a6c4e2;font-size:11px;font-weight:700}
-#detrafPainel input,#detrafPainel select,#detrafPainel textarea{background:#061d37!important;border:1px solid #2b659e!important;color:#ecf7ff!important;border-radius:9px;padding:11px 12px;width:100%;font:inherit;font-size:13px;outline:none}
-#detrafPainel input:focus,#detrafPainel select:focus,#detrafPainel textarea:focus{border-color:#41b6ff!important;box-shadow:0 0 0 3px #299fff25}
-#detrafPainel input[type=checkbox]{width:16px;height:16px;accent-color:#1e93e8}
-#detrafPainel input::placeholder{color:#7e9ebf}
-#detrafPainel .dx-nav{display:flex;gap:8px;overflow-x:auto;margin:15px 0 23px;padding-bottom:4px}
-#detrafPainel .dx-btn{font:inherit;font-size:13px;background:#123962;color:#d5eaff;border:1px solid #3174af;border-radius:10px;padding:10px 14px;cursor:pointer;white-space:nowrap;font-weight:650}
-#detrafPainel .dx-btn:hover{background:#1b5086}
-#detrafPainel .dx-btn:disabled{opacity:.5;cursor:not-allowed}
-#detrafPainel .dx-primary,#detrafPainel .dx-nav button.active{background:linear-gradient(90deg,#177de0,#24b6f4);color:#fff;border-color:#259ef4}
-#detrafPainel .dx-nav button{background:#0c2b4f;border:1px solid #245e95;color:#c2dbf5}
-#detrafPainel .dx-sectionbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:9px 0 18px}
-#detrafPainel .dx-sectionbar h2{font-size:21px;margin:0;color:#fff}
-#detrafPainel .dx-sectionbar p{color:#a5c2e2;font-size:13px;margin:5px 0 0}
-#detrafPainel .dx-panel{background:#0b284b;border:1px solid #2770aa;border-radius:19px;padding:23px;margin:15px 0;box-shadow:0 8px 30px #00000012}
-#detrafPainel .dx-panel h3{color:#eaf5ff;font-size:17px;margin:0 0 17px}
-#detrafPainel .dx-stats{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:13px;margin-bottom:19px}
-#detrafPainel .dx-stat{background:linear-gradient(135deg,#0f335e,#102c50);border:1px solid #3176ae;padding:18px;border-radius:17px;min-height:107px}
-#detrafPainel .dx-stat span{font-size:12px;color:#bad3ec;display:block}
-#detrafPainel .dx-stat strong{font-size:27px;display:block;margin-top:12px;color:#fff;word-break:break-word}
-#detrafPainel .dx-ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-#detrafPainel .dx-opcard{display:flex;flex-direction:column;align-items:stretch;text-align:left;min-height:177px;gap:9px;background:linear-gradient(155deg,#12345f,#092343);border:1px solid #3174aa;color:#fff;border-radius:17px;padding:19px;cursor:pointer}
-#detrafPainel .dx-opcard:hover{border-color:#2db0ff;transform:translateY(-2px)}
-#detrafPainel .dx-opcard strong{font-size:16px;line-height:1.35}
-#detrafPainel .dx-opcard small{color:#b8d0e8;font-size:12px;line-height:1.4}
-#detrafPainel .dx-opcard em{font-style:normal;font-size:12px;color:#7ed6ff;margin-top:auto}
-#detrafPainel .dx-opicon{display:inline-grid;place-items:center;background:#1a66aa;width:40px;height:40px;border-radius:12px;color:white;font-size:25px}
-#detrafPainel .dx-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-#detrafPainel .dx-empty{border:1px dashed #39709e;border-radius:12px;color:#abc8e5;padding:30px;text-align:center;margin:14px 0}
-#detrafPainel .dx-tablewrap{overflow-x:auto;max-width:100%}
-#detrafPainel table{width:100%;border-collapse:collapse;min-width:700px;color:#e7f2ff;font-size:12px}
-#detrafPainel th{font-size:11px;color:#81cfff;text-align:left;border-bottom:1px solid #286094;padding:13px 10px;white-space:nowrap}
-#detrafPainel td{border-bottom:1px solid #204c79;padding:12px 10px;vertical-align:middle;max-width:280px;overflow-wrap:anywhere}
-#detrafPainel .dx-muted{color:#9fbdd9;font-size:12px}
-#detrafPainel .dx-pill{display:inline-block;background:#184a75;border:1px solid #2e6da3;border-radius:30px;padding:5px 9px;font-size:11px;color:#d9eeff}
-#detrafPainel .dx-warning{padding:13px 16px;border-radius:11px;background:#103c65;border:1px solid #326fa3;color:#c8e8ff;font-size:12px;line-height:1.55}
-#detrafPainel .dx-opdetail{border-top:3px solid #208fee}
-#detrafPainel .dx-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
-#detrafPainel .dx-tabs .dx-btn{font-size:12px}
-#detrafPainel .dx-tabs .active{background:#1678d1;border-color:#39a4f1;color:#fff}
-#detrafPainel .dx-bars{display:grid;gap:12px;margin-top:18px}
-#detrafPainel .dx-barrow{display:grid;grid-template-columns:155px 1fr 52px;gap:10px;align-items:center;font-size:12px;color:#b6d6ef}
-#detrafPainel .dx-track{height:14px;background:#061b34;border:1px solid #245d91;border-radius:9px;overflow:hidden}
-#detrafPainel .dx-fill{background:linear-gradient(90deg,#137bd9,#36c4f7);height:100%;border-radius:8px}
-#detrafPainel .dx-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-#detrafPainel .dx-small{padding:7px 9px;font-size:11px}
-#detrafPainel .dx-overlay{position:fixed;z-index:999;inset:0;background:#03101fc9;display:grid;place-items:center;padding:15px}
-#detrafPainel .dx-modal{max-width:800px;width:min(800px,96vw);max-height:90vh;overflow:auto;background:#0a2849;border:1px solid #3292d8;border-radius:20px;padding:25px;box-shadow:0 25px 70px #0009}
-#detrafPainel .dx-modal h2{color:#fff;margin:0 0 8px;font-size:22px}
-#detrafPainel .dx-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:17px 0}
-#detrafPainel .dx-field{display:flex;flex-direction:column;gap:6px;font-size:12px;color:#c0dbf2}
-#detrafPainel .dx-field.wide{grid-column:1/-1}
-#detrafPainel .dx-modal textarea{min-height:80px;resize:vertical}
-#detrafPainel .dx-feedback{font-size:12px;color:#9fe3ff;min-height:20px;margin:9px 0}
-#detrafPainel a{color:#77cfff}
-#detrafPainel .dx-crumb{background:transparent!important;border:0!important;color:#8fd3ff!important;padding:0!important;margin:0 0 10px;font-size:12px;cursor:pointer}
-#detrafPainel .dx-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-@media(max-width:1000px){#detrafPainel .dx-stats{grid-template-columns:repeat(2,minmax(150px,1fr))}}
-@media(max-width:640px){#detrafPainel .dx-top{flex-direction:column}#detrafPainel .dx-grid2,#detrafPainel .dx-fields{grid-template-columns:1fr}#detrafPainel .dx-stats{grid-template-columns:1fr 1fr}#detrafPainel .dx-panel{padding:15px}#detrafPainel .dx-mark{display:none}}
-</style>
 <div id="dx-root" class="dx-app">
   <header class="dx-top"><div><div class="dx-kicker">ATEKY / GESTÃO OPERACIONAL</div><h1>Gestão <span style="color:#36b3ff">DETRAF</span></h1><p class="dx-sub">Interconexão, operadoras, documentos e acompanhamento financeiro.</p></div>
     <button type="button" id="dxRefresh" class="dx-btn dx-topbtn">↻ Atualizar dados</button></header>
@@ -128,7 +47,7 @@ function table(headers,registros,render){if(!registros.length)return vazio();con
 function linkDoc(r){const id=String(r.drive_id||'');if(!/^[A-Za-z0-9_-]{15,}$/.test(id))return 'Arquivo sem link';const a=cel('a','', 'Abrir no Drive');a.target='_blank';a.rel='noopener noreferrer';a.href='https://drive.google.com/file/d/'+id+'/view';return a;}
 function infoLimites(chave){const o=dados?.limites?.[chave];return o?.limitado?aviso('Exibindo os registros mais recentes. Há '+o.total+' registros em '+chave+'. Esta versão de testes limita o carregamento inicial para proteger o desempenho.'):null;}
 function atualizarOpcoes(){const combo=el('dxFiltroOp'),anterior=combo.value;limpa(combo);combo.append(new Option('Todas as operadoras',''));(dados.operadoras||[]).forEach(o=>combo.append(new Option((o.sigla?o.sigla+' • ':'')+o.nome,o.id)));combo.value=anterior;}
-async function carregar(){if(carregando)return;carregando=true;el('dxRefresh').disabled=true;msg('Carregando registros do DETRAF...');try{dados=await api('dxCarregar',sessao);atualizarOpcoes();render();msg('Dados atualizados.');}catch(e){msg(e.message||String(e),true);el('dxPanel').replaceChildren(aviso('Não foi possível carregar: '+(e.message||e)));throw e;}finally{carregando=false;el('dxRefresh').disabled=false;}}
+async function carregar(){if(carregando)return;carregando=true;el('dxRefresh').disabled=true;msg('Carregando registros do DETRAF...');try{dados=await api('dxCarregar',sessao);atualizarOpcoes();render();msg('Atualizado às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));}catch(e){msg(e.message||String(e),true);el('dxPanel').replaceChildren(aviso('Não foi possível carregar: '+(e.message||e)));throw e;}finally{carregando=false;el('dxRefresh').disabled=false;}}
 function mudarPagina(p){pagina=p;opDetalhe='';el('dxNav').querySelectorAll('[data-dx-page]').forEach(b=>b.classList.toggle('active',b.dataset.dxPage===p));render();}
 function render(){if(!dados)return;const destino=el('dxPanel');limpa(destino);if(opDetalhe){renderDetalhe(destino);return;}switch(pagina){case 'central':central(destino);break;case 'dashboard':dashboard(destino);break;case 'operadoras':operadoras(destino);break;case 'documentos':documentos(destino);break;case 'historico':historico(destino);break;default:registros(destino,pagina);}}
 function opsBuscadas(){const q=pesquisa.toLowerCase().trim();return (dados.operadoras||[]).filter(op=>{
@@ -137,11 +56,93 @@ function opsBuscadas(){const q=pesquisa.toLowerCase().trim();return (dados.opera
 function buscaOP(){const campo=cel('input');campo.id='dxBuscaOP';campo.type='search';campo.placeholder='Pesquisar OP, sigla ou código DETRAF...';campo.value=pesquisa;campo.style.maxWidth='370px';campo.addEventListener('input',()=>{pesquisa=campo.value;const bloc=el('dxListaOP');if(bloc){limpa(bloc);if(pagina==='operadoras')montarTabelaOP(bloc);else montarCards(bloc);}});return campo;}
 function montarCards(container){const lista=opsBuscadas().filter(o=>positivo(o.ativo));if(!lista.length){container.append(vazio('Nenhuma operadora ativa encontrada. Cadastre uma OP em Gestão de OPs.'));return;}const g=cel('div','dx-ops');lista.forEach(o=>{const b=cel('button','dx-opcard');b.type='button';b.append(cel('span','dx-opicon','◈'),cel('strong','',o.nome),cel('small','',[(o.tipo||'Parceira'),o.sigla||'',o.codigos?'Código(s): '+o.codigos:''].filter(Boolean).join(' • ')),cel('em','','Abrir dashboard →'));b.addEventListener('click',()=>{opDetalhe=o.id;abaDetalhe='resumo';render();});g.append(b);});container.append(g);}
 function central(destino){destino.append(section('Selecione uma operadora','Acesse o painel, documentos e histórico individual de cada OP.',buscaOP()));const s=cel('div');s.id='dxListaOP';montarCards(s);destino.append(s);}
-function dashboard(destino){destino.append(section('Dashboard geral','Posição operacional calculada a partir dos lançamentos cadastrados.'));
- const fin=filtrados(dados.financeiro),pen=filtrados(dados.pendencias),cts=filtrados(dados.contestacoes),cc=filtrados(dados.conciliacoes);
+function dashboard(destino){
+ destino.append(section('Dashboard geral','Posição operacional calculada a partir dos lançamentos cadastrados. Clique em um indicador para abrir a área.'));
+ const fin=filtrados(dados.financeiro),pen=filtrados(dados.pendencias),cts=filtrados(dados.contestacoes),cc=filtrados(dados.conciliacoes),docs=filtrados(dados.documentos);
  const aberto=fin.filter(r=>r.status==='PENDENTE'),soma=t=>aberto.filter(r=>r.natureza===t).reduce((n,r)=>n+Number(r.valor||0),0);
- destino.append(kpis([['Documentos',filtrados(dados.documentos).length],['A pagar (pendente)',moeda(soma('PAGAR'))],['A receber (pendente)',moeda(soma('RECEBER'))],['Pendências abertas',pen.filter(r=>r.status!=='RESOLVIDA').length],['Contestações em aberto',cts.filter(r=>!['ENCERRADA','RETIFICADA'].includes(r.status)).length],['Conciliações',cc.length],['Operadoras ativas',(dados.operadoras||[]).filter(x=>positivo(x.ativo)).length],['Aguardando leitura',filtrados(dados.documentos).filter(x=>x.status==='AGUARDANDO_LEITURA').length]]));
- const s=painel('Documentação por operadora');const bars=cel('div','dx-bars'),ds=filtrados(dados.documentos);const ops=(dados.operadoras||[]).filter(op=>!fOp()||op.id===fOp());const counts=ops.map(op=>({op,count:ds.filter(d=>d.operadora===op.id).length}));const max=Math.max(1,...counts.map(x=>x.count));counts.forEach(x=>{const row=cel('div','dx-barrow');row.append(cel('span','',x.op.sigla||x.op.nome));const track=cel('div','dx-track'),bar=cel('div','dx-fill');bar.style.width=(100*x.count/max)+'%';track.append(bar);row.append(track,cel('strong','',x.count));bars.append(row);});s.append(counts.length?bars:vazio());destino.append(s);destino.append(aviso('Valores são lançamentos manuais registrados; documentos aguardando leitura não alimentam os indicadores automaticamente.'));}
+ const pagar=soma('PAGAR'),receber=soma('RECEBER'),saldo=receber-pagar;
+ const penAb=pen.filter(r=>r.status!=='RESOLVIDA'),ctsAb=cts.filter(r=>!['ENCERRADA','RETIFICADA'].includes(r.status));
+ const hoje=new Date().toISOString().slice(0,10);
+ const vencidos=aberto.filter(r=>r.vencimento&&String(r.vencimento).slice(0,10)<hoje);
+ const inteiro=n=>String(Math.round(n));
+ // Indicadores principais
+ const kp=cel('div','dx-kpis');
+ [
+  {k:'pagar',ic:'↗',label:'A pagar (pendente)',valor:pagar,fmt:moeda,sub:aberto.filter(r=>r.natureza==='PAGAR').length+' lançamento(s) em aberto',ir:'financeiro'},
+  {k:'receber',ic:'↙',label:'A receber (pendente)',valor:receber,fmt:moeda,sub:aberto.filter(r=>r.natureza==='RECEBER').length+' lançamento(s) em aberto',ir:'financeiro'},
+  {k:'saldo'+(saldo<0?' neg':''),ic:'⚖',label:'Saldo previsto',valor:saldo,fmt:moeda,sub:saldo>=0?'A receber supera a pagar':'A pagar supera a receber',ir:'financeiro'},
+  {k:'pend'+(vencidos.length?' alerta':''),ic:'◉',label:'Pendências abertas',valor:penAb.length,fmt:inteiro,sub:vencidos.length?'⚠ '+vencidos.length+' vencimento(s) em atraso':'Nenhum vencimento em atraso',ir:'pendencias'}
+ ].forEach((c,i)=>{
+  const b=cel('button','dx-kpi dx-kpi-'+c.k);b.type='button';b.style.setProperty('--i',i);
+  const top=cel('div','dx-kpi-top');top.append(cel('span','dx-kpi-ic',c.ic),cel('span','dx-kpi-label',c.label));
+  const v=cel('strong','dx-kpi-val',c.fmt(0));contar(v,c.valor,c.fmt);
+  b.append(top,v,cel('small','dx-kpi-sub',c.sub),cel('em','dx-kpi-go','Ver detalhes →'));
+  b.addEventListener('click',()=>mudarPagina(c.ir));kp.append(b);
+ });
+ destino.append(kp);
+ // Indicadores secundários
+ const mini=cel('div','dx-minis');
+ [['▤','Documentos',docs.length,'documentos'],['◔','Aguardando leitura',docs.filter(x=>x.status==='AGUARDANDO_LEITURA').length,'documentos'],['⇄','Conciliações',cc.length,'conciliacoes'],['⚑','Contestações em aberto',ctsAb.length,'contestacoes'],['▥','Operadoras ativas',(dados.operadoras||[]).filter(x=>positivo(x.ativo)).length,'operadoras']]
+  .forEach(([ic,l,n,ir],i)=>{const b=cel('button','dx-mini');b.type='button';b.style.setProperty('--i',i);const v=cel('strong','','0');contar(v,n,inteiro);b.append(cel('span','dx-mini-ic',ic),v,cel('span','dx-mini-l',l));b.addEventListener('click',()=>mudarPagina(ir));mini.append(b);});
+ destino.append(mini);
+ // Gráfico + vencimentos
+ const grid=cel('div','dx-dashgrid');grid.append(graficoFinanceiro(fin),proximosVencimentos(aberto,hoje));destino.append(grid);
+ // Documentação por operadora
+ const s=painel('Documentação por operadora');const bars=cel('div','dx-bars'),ds=docs;const ops=(dados.operadoras||[]).filter(op=>!fOp()||op.id===fOp());const counts=ops.map(op=>({op,count:ds.filter(d=>d.operadora===op.id).length})).sort((a,b)=>b.count-a.count);const max=Math.max(1,...counts.map(x=>x.count));
+ counts.forEach(x=>{const row=cel('div','dx-barrow');row.title=(x.op.sigla||x.op.nome)+': '+x.count+' documento(s)';row.append(cel('span','',x.op.sigla||x.op.nome));const track=cel('div','dx-track'),bar=cel('div','dx-fill');bar.style.width=(100*x.count/max)+'%';track.append(bar);row.append(track,cel('strong','',x.count));bars.append(row);});
+ s.append(counts.length?bars:vazio());destino.append(s);
+ destino.append(aviso('Valores são lançamentos manuais registrados; documentos aguardando leitura não alimentam os indicadores automaticamente.'));
+}
+function contar(alvo,valor,fmt){
+ if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){alvo.textContent=fmt(valor);return;}
+ const t0=performance.now(),dur=900;const passo=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);alvo.textContent=fmt(valor*e);if(p<1)requestAnimationFrame(passo);};requestAnimationFrame(passo);
+}
+function moedaCurta(v){const n=Number(v||0);return n>=1e6?'R$ '+(n/1e6).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mi':n>=1e3?'R$ '+(n/1e3).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mil':'R$ '+n.toLocaleString('pt-BR',{maximumFractionDigits:0});}
+function graficoFinanceiro(fin){
+ const p=painel();const head=cel('div','dx-chart-head');const t=cel('div');t.append(cel('h3','','Financeiro por competência'),cel('p','dx-muted','Valores lançados (exceto estornados) — últimas 6 competências.'));
+ const leg=cel('div','dx-legend');[['pagar','A pagar'],['receber','A receber']].forEach(([k,l])=>{const it=cel('span','dx-leg');it.append(cel('i','dx-sw dx-sw-'+k),document.createTextNode(l));leg.append(it);});
+ head.append(t,leg);p.append(head);
+ const comps=[...new Set(fin.map(r=>r.competencia).filter(Boolean))].sort().slice(-6);
+ if(!comps.length){p.append(vazio('Sem lançamentos financeiros para os filtros selecionados.'));return p;}
+ const tot=(c,n)=>fin.filter(r=>r.competencia===c&&r.natureza===n&&r.status!=='ESTORNADO').reduce((s,r)=>s+Number(r.valor||0),0);
+ const serie=comps.map(c=>({c,pagar:tot(c,'PAGAR'),receber:tot(c,'RECEBER')}));
+ const max=Math.max(1,...serie.flatMap(x=>[x.pagar,x.receber]));
+ const area=cel('div','dx-chart');const eixo=cel('div','dx-yaxis');[max,max/2,0].forEach(v=>eixo.append(cel('span','',moedaCurta(v))));
+ const plot=cel('div','dx-plot');const tip=cel('div','dx-tip');tip.hidden=true;
+ serie.forEach((x,i)=>{
+  const col=cel('div','dx-col');col.tabIndex=0;col.setAttribute('aria-label',compFmt(x.c)+': a pagar '+moeda(x.pagar)+', a receber '+moeda(x.receber));
+  const par=cel('div','dx-pair');[['pagar',x.pagar],['receber',x.receber]].forEach(([k,v])=>{const b=cel('div','dx-bar dx-bar-'+k);b.style.height=(v/max*100)+'%';b.style.setProperty('--i',i);par.append(b);});
+  col.append(par,cel('span','dx-xlab',compFmt(x.c)));
+  const mostrar=()=>{tip.replaceChildren(cel('strong','',compFmt(x.c)));[['pagar','A pagar',x.pagar],['receber','A receber',x.receber]].forEach(([k,l,v])=>{const r=cel('div','dx-tip-row');r.append(cel('i','dx-sw dx-sw-'+k),cel('span','',l),cel('b','',moeda(v)));tip.append(r);});
+   const s=cel('div','dx-tip-row dx-tip-saldo');s.append(cel('span','','Saldo'),cel('b','',moeda(x.receber-x.pagar)));tip.append(s);
+   tip.hidden=false;const pr=plot.getBoundingClientRect(),cr=col.getBoundingClientRect();tip.style.left=Math.min(pr.width-170,Math.max(0,cr.left-pr.left+cr.width/2-85))+'px';col.classList.add('on');};
+  const ocultar=()=>{tip.hidden=true;col.classList.remove('on');};
+  col.addEventListener('mouseenter',mostrar);col.addEventListener('focus',mostrar);col.addEventListener('mouseleave',ocultar);col.addEventListener('blur',ocultar);
+  plot.append(col);
+ });
+ plot.append(tip);area.append(eixo,plot);p.append(area);
+ // Visão em tabela (acessibilidade)
+ const tg=botao('Ver tabela',()=>{tw.hidden=!tw.hidden;tg.textContent=tw.hidden?'Ver tabela':'Ocultar tabela';});tg.classList.add('dx-small');
+ const tw=cel('div');tw.hidden=true;tw.append(table(['Competência','A pagar','A receber','Saldo'],serie,x=>[compFmt(x.c),moeda(x.pagar),moeda(x.receber),moeda(x.receber-x.pagar)]));
+ p.append(tg,tw);return p;
+}
+function proximosVencimentos(aberto,hoje){
+ const p=painel('Próximos vencimentos');
+ const lista=aberto.filter(r=>r.vencimento).sort((a,b)=>String(a.vencimento).localeCompare(String(b.vencimento))).slice(0,6);
+ if(!lista.length){p.append(vazio('Nenhum lançamento pendente com vencimento definido.'));return p;}
+ const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+ const ul=cel('div','dx-venc');
+ lista.forEach((r,i)=>{
+  const d=String(r.vencimento).slice(0,10),dias=Math.round((Date.parse(d)-Date.parse(hoje))/864e5),atras=dias<0;
+  const row=cel('button','dx-venc-row'+(atras?' atrasado':'')+(dias===0?' hoje':''));row.type='button';row.style.setProperty('--i',i);
+  const data=cel('div','dx-venc-data');data.append(cel('strong','',d.slice(8,10)),cel('span','',meses[Number(d.slice(5,7))-1]||''));
+  const info=cel('div','dx-venc-info');info.append(cel('strong','',r.descricao||(r.natureza==='PAGAR'?'Pagamento':'Recebimento')),cel('small','',opNome(r.operadora_id)+' · '+compFmt(r.competencia)));
+  const val=cel('div','dx-venc-val');const v=cel('strong','');v.append(cel('i','dx-sw dx-sw-'+(r.natureza==='PAGAR'?'pagar':'receber')),document.createTextNode(moeda(r.valor)));
+  val.append(v,cel('small',atras?'dx-atraso':'',atras?'Atrasado há '+(-dias)+' dia(s)':dias===0?'Vence hoje':'Em '+dias+' dia(s)'));
+  row.append(data,info,val);row.title='Editar lançamento';row.addEventListener('click',()=>abrirForm('financeiro',r));ul.append(row);
+ });
+ p.append(ul);return p;
+}
 function operadoras(destino){const a=cel('div','dx-row');a.append(buscaOP());if(dados.admin)a.append(botao('+ Nova operadora',()=>abrirForm('operadoras'),true));destino.append(section('Gestão de operadoras','Cadastro de siglas, códigos DETRAF e regras de encontro de contas.',a));
  const s=painel('Operadoras cadastradas'),list=cel('div');list.id='dxListaOP';montarTabelaOP(list);s.append(list);destino.append(s);const warn=infoLimites('operadoras');if(warn)destino.append(warn);}
 function montarTabelaOP(list){const filtr=opsBuscadas();list.append(table(['Operadora','Sigla','Tipo','Código(s) DETRAF','Encontro de contas','Situação','Ações'],filtr,o=>{
