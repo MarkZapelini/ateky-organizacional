@@ -5,6 +5,7 @@
   "scripts": {
     "verificar": "node tools/verificar.mjs",
     "local:instalar": "node tools/local/instalar.mjs",
-    "local": "node tools/local/servidor.mjs"
+    "local": "node tools/local/servidor.mjs",
+    "test": "node tools/testar.mjs"
   }
 }

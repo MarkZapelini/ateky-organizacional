@@ -11,7 +11,8 @@ import crypto from 'node:crypto';
 
 export const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SRC = join(RAIZ, 'src');
-const LOCAL = join(RAIZ, '.local');
+// ATEKY_LOCAL_DIR permite usar uma base descartável (usada pelos testes automáticos).
+const LOCAL = process.env.ATEKY_LOCAL_DIR || join(RAIZ, '.local');
 const DB = join(LOCAL, 'planilhas');
 const DRIVE = join(LOCAL, 'drive');
 const PROPS = join(LOCAL, 'propriedades.json');
@@ -101,6 +102,7 @@ const Utilities = {
 
 /* ───── HtmlService ───── */
 let ctx;
+// Nome no Apps Script inclui a pasta: 'html/Org_Index' → src/html/Org_Index.html
 const lerHtml = n => { const f = join(SRC, n + '.html'); if (!existsSync(f)) throw new Error('No HTML file named ' + n); return readFileSync(f, 'utf8'); };
 const saida = conteudo => ({ getContent: () => conteudo, setTitle() { return this; }, setXFrameOptionsMode() { return this; }, addMetaTag() { return this; } });
 const HtmlService = {
@@ -120,8 +122,9 @@ ctx = vm.createContext({
   LockService: { getScriptLock: () => ({ waitLock() {}, tryLock: () => true, releaseLock() {} }) },
   Logger: { log: (...a) => console.log('[Logger]', ...a) }
 });
-for (const f of readdirSync(SRC).filter(f => f.endsWith('.js')).sort()) {
-  vm.runInContext(readFileSync(join(SRC, f), 'utf8'), ctx, { filename: f });
+const SRC_JS = join(SRC, 'js');
+for (const f of readdirSync(SRC_JS).filter(f => f.endsWith('.js')).sort()) {
+  vm.runInContext(readFileSync(join(SRC_JS, f), 'utf8'), ctx, { filename: 'js/' + f });
 }
 
 /** Executa uma função global do projeto, como o google.script.run faria. */

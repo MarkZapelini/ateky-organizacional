@@ -5,7 +5,7 @@ description: Lê, interpreta e valida o código do Ateky Organizacional (Google 
 
 # Ateky — analisar e encaixar código
 
-Projeto: Google Apps Script (JavaScript V8 + HTML/CSS) em `src/`. Mapa de arquivos e linguagens em `CLAUDE.md`.
+Projeto: Google Apps Script (JavaScript V8 + HTML/CSS) em `src/`. Mapa de arquivos e linguagens em `CLAUDE.md`. Servidor em `src/js/`, telas em `src/html/`.
 
 ## Passos
 
@@ -18,12 +18,12 @@ Projeto: Google Apps Script (JavaScript V8 + HTML/CSS) em `src/`. Mapa de arquiv
    | `dt2*`, `DT2` | DETRAF base (planilha/Drive) | `Dt2_*.js` |
    | `dtGestao*` | DETRAF gestão operacional | `Dt_Gestao.js` |
    | `dx*`, `DX_CFG` | Núcleo usado pela tela DETRAF | `Dx_Nucleo.js` |
-   | `<style>` puro | Tema | `Org_Tema_*.html` |
-   | `<div>`/`<script>` de tela | Interface | `Org_*.html` |
+   | `<style>` puro | Tema | `src/html/Org_Tema_*.html` |
+   | `<div>`/`<script>` de tela | Interface | `src/html/Org_*.html` |
    | "exemplo", "não copie" | Referência | `_exemplos/` |
-3. **Antes de criar arquivo**, procure se a função já existe (`Grep "function nome"` em `src/`). Se existir: o código novo diz "substitui"? Substitua. Senão, pergunte ou mantenha a versão mais segura e diga qual.
+3. **Antes de criar arquivo**, procure se a função já existe (`Grep "function nome"` em `src/js/`). Se existir: o código novo diz "substitui"? Substitua. Senão, pergunte ou mantenha a versão mais segura e diga qual.
 4. **Formatar** legível (indentação de 2 espaços), sem mudar comportamento. Correções de bug: faça e liste no resumo.
-5. **Rodar o verificador**: `node tools/verificar.mjs`. Tem que terminar com `0 erro(s)`.
+5. **Rodar o verificador e os testes**: `node tools/verificar.mjs` (0 erros) e `npm test` (0 falhas).
    - `DUPLICADA` → remova uma das declarações (Apps Script usa a última sem avisar).
    - `NAO_DEFINIDA` / `CLIENTE_SEM_BACKEND` → falta código: liste para o usuário o que ainda precisa ser enviado.
    - `CLIENTE_CHAMA_PRIVADA` → função com `_` não é chamável pelo `google.script.run`; crie um wrapper público.

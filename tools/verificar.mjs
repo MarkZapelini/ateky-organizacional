@@ -20,9 +20,10 @@ import { fileURLToPath } from 'node:url';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const src = join(raiz, 'src');
-const arquivos = readdirSync(src);
-const js = arquivos.filter(f => f.endsWith('.js'));
-const html = arquivos.filter(f => f.endsWith('.html'));
+// Estrutura: src/js/*.js e src/html/*.html. Nomes no formato "js/X.js" e "html/X.html"
+// (no Apps Script, a pasta faz parte do nome do arquivo).
+const js = readdirSync(join(src, 'js')).filter(f => f.endsWith('.js')).map(f => 'js/' + f);
+const html = readdirSync(join(src, 'html')).filter(f => f.endsWith('.html')).map(f => 'html/' + f);
 const ler = f => readFileSync(join(src, f), 'utf8');
 
 const erros = [];

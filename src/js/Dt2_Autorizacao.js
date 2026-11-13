@@ -15,5 +15,5 @@ function orgDetrafAutorizarSessao_(token, permissao) {
 
 function orgDetrafModuloDisponivel(sessao) {
   orgDetrafAutorizarSessao_(sessao, 'detraf.ler');
-  return { id: 'detraf', titulo: 'DETRAF 2.0', html: 'Org_Detraf_Interface' };
+  return { id: 'detraf', titulo: 'DETRAF 2.0', html: 'html/Org_Detraf_Interface' };
 }

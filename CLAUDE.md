@@ -11,8 +11,18 @@ Web App em **Google Apps Script**. Login único (ORGA) + módulo DETRAF 2.0. Amb
 | `tools/*.mjs` | JavaScript Node.js (módulo ES) | Seu computador |
 | `.md` | Markdown, a documentação e as skills | — |
 
-## Arquivos em `src/`
-**Entrada:** `Org_Main.js` (`doGet`) → `Org_Index.html` (inclui `Org_Tema_Global.html` e `Org_Detraf_Interface.html`).
+## Estrutura
+```
+src/
+  appsscript.json     manifesto
+  js/   *.js          servidor (Apps Script)
+  html/ *.html        telas e temas
+tools/                verificador, testes, emulador local, túnel
+```
+No Apps Script a pasta faz parte do nome: os arquivos HTML são referenciados como `'html/Org_Index'`, `'html/Org_Tema_Global'` etc.
+
+## Arquivos
+**Entrada:** `js/Org_Main.js` (`doGet`) → `html/Org_Index.html` (inclui `html/Org_Tema_Global.html` e `html/Org_Detraf_Interface.html`).
 
 | Arquivo | Função |
 |---|---|
@@ -42,7 +52,15 @@ Web App em **Google Apps Script**. Login único (ORGA) + módulo DETRAF 2.0. Amb
 3. `dt2Instalar()` → `dtGestaoInstalar()` → `dxInstalarComplementos()`
 4. Implantar como App da Web.
 
+## Comandos
+| Comando | Faz |
+|---|---|
+| `npm run verificar` | Checagem estática (sintaxe, duplicadas, funções ausentes, includes) |
+| `npm test` | 50 testes automáticos numa base temporária |
+| `npm run local:instalar` / `npm run local` | Base e servidor locais em http://localhost:8080 |
+| `tools/tunel-cloudflare.bat` | Publica o servidor local via Cloudflare (o usuário executa) |
+
 ## Regras
-- Antes de entregar: `node tools/verificar.mjs` tem que dar 0 erros.
-- Skills: `ateky-analisar` (encaixar código novo) e `ateky-erros` (diagnosticar e registrar a lição em `docs/ERROS_CONHECIDOS.md`).
+- Antes de entregar ou fazer commit: `npm run verificar` com 0 erros **e** `npm test` com 0 falhas.
+- Skills: `ateky-analisar` (encaixar código novo), `ateky-testar` (rodar e interpretar testes), `ateky-erros` (diagnosticar e registrar a lição em `docs/ERROS_CONHECIDOS.md`), `auditor-projetos-tecnicos` (auditoria de projetos FTTH/telecom).
 - Funções com `_` no final são privadas e não podem ser chamadas pelo `google.script.run`.
